@@ -39,7 +39,7 @@ const handleSubmit = (event) => {
     }).then((response) => {
         console.log("SUCCESS!!!");
         // refresh solution
-        // getSolution();
+        getSolution();
         // render();
     }).catch(function(response) {
         // notify the user
@@ -58,6 +58,7 @@ const getSolution = () => {
     }).then((response) => {
         console.log('in get solution: ', response)
         solutions = response;
+        console.log('solutions: ', solutions)
 
         render()
     })
@@ -66,6 +67,7 @@ const getSolution = () => {
 const render = () => {
     console.log('in render');
     $('#solutionList').empty();
+    console.log(solutions[0])
     $('#solution').val(solutions[0].solution);
 
     for (let solution of solutions) {

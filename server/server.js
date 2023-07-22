@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = 5000;
 
-let calcHistory = [];
+let calcHistory = [{num1: 8, num2: 4}];
 
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -24,7 +24,11 @@ app.post('/input', (req, res) => {
 //     // calcHistory.unshift(calculation);
 // }
 
+app.get('/solution', (req, res) => {
+    console.log('in solution get');
 
+    res.send(calcHistory);
+})
 
 
 
