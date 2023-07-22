@@ -5,31 +5,43 @@ let operator;
 
 function onReady() {
     $('#submitBtn').on('click', handleSubmit);
-    // $('.operBtn').on('click', handleOperator);
+    $('.operBtn').on('click', handleOperator);
 
     $('#clearBtn').on('click', handleClear)
 
 
 }
 
-// const handleOperator = (event) => {
-//     event.preventDefault();
-//     console.log('in operator')
+const handleOperator = (event) => {
+    event.preventDefault();
 
-//     if($(this).hasClass('addBtn')) {
-//         operator = 
-//     }
+    console.log(event.target.id)
 
-// }
+    switch (event.target.id) {
+        case 'addBtn': 
+            operator = '+';
+            break;
+        case 'subBtn': 
+            operator = '-';
+            break;
+        case 'multBtn': 
+            operator = '*';
+            break;
+        case 'divBtn': 
+            operator = '/';
+            break;
+    }
+        // console.log('operator: ', operator)
+}
 
 const handleSubmit = (event) => {
     event.preventDefault();
     console.log('in submit');
 
     let operationInputs = {
-        num1: $('#num1').val(),
-        num2: $('#num2').val()
-
+        number1: $('#num1').val(),
+        number2: $('#num2').val(),
+        operator: operator
     }
     console.log(operationInputs)
     $.ajax({
@@ -47,7 +59,8 @@ const handleSubmit = (event) => {
     });
 }
 
-const handleClear = () => {
+const handleClear = (event) => {
+    event.preventDefault();
     $('input').val('');
 }
 
@@ -68,11 +81,12 @@ const render = () => {
     console.log('in render');
     $('#solutionList').empty();
     console.log(solutions[0])
-    $('#solution').val(solutions[0].solution);
+    $('#solution').text(solutions[0].solution);
+    console.log('this problem solution: ', solutions[0].solution)
 
     for (let solution of solutions) {
         $('#solutionList').append(`
-        <li>${solution.num1} operator ${solution.num2} = ${solution.solution}
+        <li>${solution.number1} ${solution.operator} ${solution.number2} = ${solution.solution}
         `)
     }
 }

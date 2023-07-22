@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = 5000;
 
-let calcHistory = [{num1: 8, num2: 4}];
+let calcHistory = [];
 
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -13,16 +13,30 @@ app.post('/input', (req, res) => {
     console.log('in server post input', req.body);
 
     // assign body to a variable and call calculate() with it
-    // operInput = req.body;
-    // calculate(operInput);
+    let operInput = req.body;
+    calculate(operInput);
 
     res.sendStatus(201);
 })
 
-// const calculate = (calculation) => {
-//     // calculation.solution = calculation.num1 calculation.operator calculation.num2;
-//     // calcHistory.unshift(calculation);
-// }
+const calculate = (inputs) => {
+    switch (inputs.operator) {
+        case '+': 
+            inputs.solution = Number(inputs.number1) + Number(inputs.number2);
+            break;
+        case '-': 
+            inputs.solution = inputs.number1 - inputs.number2;
+            break;
+        case '*': 
+            inputs.solution = inputs.number1 * inputs.number2;
+            break;
+        case '/': 
+            inputs.solution = inputs.number1 / inputs.number2;
+            break;
+    }
+    console.log(inputs.solution);
+    calcHistory.unshift(inputs);
+}
 
 app.get('/solution', (req, res) => {
     console.log('in solution get');
