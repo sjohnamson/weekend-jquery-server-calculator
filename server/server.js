@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 app.use(express.static('server/public'));
 
-app.post('./input', (req, res) => {
+app.post('/input', (req, res) => {
     console.log('in server post input', req.body);
 
     // assign body to a variable and call calculate() with it
@@ -19,10 +19,10 @@ app.post('./input', (req, res) => {
     res.sendStatus(201);
 })
 
-const calculate = (calculation) => {
-    calculation.solution = calculation.num1 calculation.operator calculation.num2;
-    calcHistory.unshift(calculation);
-}
+// const calculate = (calculation) => {
+//     // calculation.solution = calculation.num1 calculation.operator calculation.num2;
+//     // calcHistory.unshift(calculation);
+// }
 
 
 
