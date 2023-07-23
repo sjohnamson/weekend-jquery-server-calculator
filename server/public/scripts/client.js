@@ -2,37 +2,62 @@ $(document).ready(onReady);
 
 let solutions;
 let operator;
+let displayedNum;
 
 function onReady() {
-    $('#submitBtn').on('click', handleSubmit);
-    $('.operBtn').on('click', handleOperator);
 
+    $('.numBtn').on('click', handleNumber);
+    $('.operBtn').on('click', handleOperator);
+    $('#submitBtn').on('click', handleSubmit);
     $('#clearBtn').on('click', handleClear)
 
 
 }
+
+const handleNumber = (event) => {
+    event.preventDefault();
+
+    console.log(event.target.id)
+
+    let newNum = event.target.id;
+    console.log('newNum is:', newNum)
+
+    if ($('#operator').text() == '') {
+        $('#num1').text($('#num1').text() + newNum);
+    } else {
+        $('#num2').text($('#num2').text() + newNum);
+    }
+    
+}
+
 
 const handleOperator = (event) => {
     event.preventDefault();
 
     console.log(event.target.id)
 
-    switch (event.target.id) {
-        case 'addBtn': 
-            operator = '+';
-            break;
-        case 'subBtn': 
-            operator = '-';
-            break;
-        case 'multBtn': 
-            operator = '*';
-            break;
-        case 'divBtn': 
-            operator = '/';
-            break;
+    let newOper = event.target.id;
+    console.log('newOper is:', newOper)
+
+    if ($('#operator').text() == '') {
+        $('#operator').text($('#operator').text() + newOper);
+    // switch (event.target.id) {
+    //     case 'addBtn': 
+    //         operator = '+';
+    //         break;
+    //     case 'subBtn': 
+    //         operator = '-';
+    //         break;
+    //     case 'multBtn': 
+    //         operator = '*';
+    //         break;
+    //     case 'divBtn': 
+    //         operator = '/';
+    //         break;
+    // }
+    //     // console.log('operator: ', operator)
+        }
     }
-        // console.log('operator: ', operator)
-}
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -61,7 +86,7 @@ const handleSubmit = (event) => {
 
 const handleClear = (event) => {
     event.preventDefault();
-    $('input').val('');
+    $('#inputField').children().empty();
 }
 
 const getSolution = () => {

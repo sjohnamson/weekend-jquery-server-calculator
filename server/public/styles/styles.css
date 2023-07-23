@@ -1,0 +1,10 @@
+#inputField {
+    border: 1px solid black;
+    height: 1.5em;
+}
+
+input {
+    border: none;
+    min-width: 0px; 
+}
+

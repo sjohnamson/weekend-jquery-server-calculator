@@ -12,20 +12,27 @@
 <body>
     <header>Finally, a Calculator!</header>
     <main>
-        <form>
-            <input id="num1"
-                placeholder="enter first number";
-                type="number">
-            <button class="operBtn" id="addBtn">+</button>
-            <button class="operBtn" id="subBtn">-</button>
-            <button class="operBtn" id="multBtn">*</button>
-            <button class="operBtn" id="divBtn">/</button>
-     event       <input id="num2"
-                placeholder="enter second number";
-                type="number">
+            <div id="inputField">
+                <span id="num1"></span>
+                <span id="operator"></span>
+                <span id="num2"></span>
+            </div>
+            <button class="numBtn" id="1">1</button>
+            <button class="numBtn" id="2">2</button>
+            <button class="numBtn" id="3">3</button>
+            <button class="numBtn" id="4">4</button>
+            <button class="numBtn" id="5">5</button>
+            <button class="numBtn" id="6">6</button>
+            <button class="numBtn" id="7">7</button>
+            <button class="numBtn" id="8">8</button>
+            <button class="numBtn" id="9">9</button>
+            <button class="numBtn" id=".">.</button>
             <button id="submitBtn">=</button>
             <button id="clearBtn">C</button>
-        </form>
+            <button class="operBtn" id="+">+</button>
+            <button class="operBtn" id="-">-</button>
+            <button class="operBtn" id="*">*</button>
+            <button class="operBtn" id="/">/</button>
         <div id="solution"></div>
         <ul id="solutionList">
             <!-- This is where the calculations will go -->
