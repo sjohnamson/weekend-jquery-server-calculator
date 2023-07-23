@@ -1,7 +1,6 @@
 $(document).ready(onReady);
 
 let solutions;
-let operator;
 let displayedNum;
 
 function onReady() {
@@ -9,7 +8,29 @@ function onReady() {
     $('.numBtn').on('click', handleNumber);
     $('.operBtn').on('click', handleOperator);
     $('#submitBtn').on('click', handleSubmit);
-    $('#clearBtn').on('click', handleClear)
+    $('#clearBtn').on('click', handleClear);
+    $('#allClearBtn').on('click', handleAllClear)
+
+
+}
+
+const handleAllClear = (event) => {
+    event.preventDefault();
+    $('#inputField').children().empty();
+
+    $.ajax({
+        method: 'DELETE',
+        url: '/deletecalculations',
+        data: 'calcHistory'
+    }).then((response) => {
+        console.log("SUCCESS!!!");
+        // refresh solution
+        getSolution();
+        // render();
+    }).catch(function (response) {
+        // notify the user
+        alert('request failed');
+    });
 
 
 }
@@ -27,7 +48,7 @@ const handleNumber = (event) => {
     } else {
         $('#num2').text($('#num2').text() + newNum);
     }
-    
+
 }
 
 
@@ -41,47 +62,52 @@ const handleOperator = (event) => {
 
     if ($('#operator').text() == '') {
         $('#operator').text($('#operator').text() + newOper);
-    // switch (event.target.id) {
-    //     case 'addBtn': 
-    //         operator = '+';
-    //         break;
-    //     case 'subBtn': 
-    //         operator = '-';
-    //         break;
-    //     case 'multBtn': 
-    //         operator = '*';
-    //         break;
-    //     case 'divBtn': 
-    //         operator = '/';
-    //         break;
-    // }
-    //     // console.log('operator: ', operator)
-        }
+        // switch (event.target.id) {
+        //     case 'addBtn': 
+        //         operator = '+';
+        //         break;
+        //     case 'subBtn': 
+        //         operator = '-';
+        //         break;
+        //     case 'multBtn': 
+        //         operator = '*';
+        //         break;
+        //     case 'divBtn': 
+        //         operator = '/';
+        //         break;
+        // }
+        //     // console.log('operator: ', operator)
     }
+}
 
 const handleSubmit = (event) => {
     event.preventDefault();
     console.log('in submit');
 
     let operationInputs = {
-        number1: $('#num1').val(),
-        number2: $('#num2').val(),
-        operator: operator
+        number1: $('#num1').text(),
+        number2: $('#num2').text(),
+        operator: $('#operator').text()
     }
-    console.log(operationInputs)
-    $.ajax({
-        method: 'POST',
-        url: '/input',
-        data: operationInputs
-    }).then((response) => {
-        console.log("SUCCESS!!!");
-        // refresh solution
-        getSolution();
-        // render();
-    }).catch(function(response) {
-        // notify the user
-        alert('request failed');
-    });
+    console.log(operationInputs.number1)
+
+    if (operationInputs.number1 && operationInputs.number2 && operationInputs.operator) {
+        console.log('in client post')
+        $.ajax({
+            method: 'POST',
+            url: '/input',
+            data: operationInputs
+        }).then((response) => {
+            console.log("SUCCESS!!!");
+            // refresh solution
+            getSolution();
+            // render();
+        }).catch(function (response) {
+            // notify the user
+            alert('request failed');
+        });
+    }
+    $('#inputField').children().empty();
 }
 
 const handleClear = (event) => {
@@ -105,13 +131,16 @@ const getSolution = () => {
 const render = () => {
     console.log('in render');
     $('#solutionList').empty();
-    console.log(solutions[0])
-    $('#solution').text(solutions[0].solution);
-    console.log('this problem solution: ', solutions[0].solution)
+    $('#solution').text('');
 
     for (let solution of solutions) {
+        if (solution == solutions[0]) {
+             $('#solution').text(solutions[0].solution);
+            console.log('this problem solution: ', solutions[0].solution)
+        }
         $('#solutionList').append(`
-        <li>${solution.number1} ${solution.operator} ${solution.number2} = ${solution.solution}
-        `)
+            <li>${solution.number1} ${solution.operator} ${solution.number2} = ${solution.solution}
+            `)
     }
+
 }

@@ -19,6 +19,13 @@ app.post('/input', (req, res) => {
     res.sendStatus(201);
 })
 
+app.delete('/deletecalculations', (req, res) => {
+    console.log('in delete request', req.body);
+    calcHistory = [];
+
+    res.send("DELETE Request Called")
+})
+
 const calculate = (inputs) => {
     switch (inputs.operator) {
         case '+': 
