@@ -93,21 +93,6 @@ const handleOperator = (event) => {
 
     if ($('#operator').text() == '') {
         $('#operator').text($('#operator').text() + newOper);
-        // switch (event.target.id) {
-        //     case 'addBtn': 
-        //         operator = '+';
-        //         break;
-        //     case 'subBtn': 
-        //         operator = '-';
-        //         break;
-        //     case 'multBtn': 
-        //         operator = '*';
-        //         break;
-        //     case 'divBtn': 
-        //         operator = '/';
-        //         break;
-        // }
-        //     // console.log('operator: ', operator)
     }
 }
 
