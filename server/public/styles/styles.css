@@ -21,7 +21,7 @@ main {
     flex-direction: column;
     justify-content: center;
 }
-    
+
 #inputField {
     display: flex;
     flex-direction: row;
@@ -37,17 +37,20 @@ main {
 
 input {
     border: none;
-    min-width: 0px; 
+    min-width: 0px;
 }
 
-.numBtn, .operBtn, #submitBtn {
+.numBtn,
+.operBtn,
+#submitBtn {
     width: 23.8%;
     font-weight: bold;
     height: 4em;
     font-size: larger;
 }
 
-#clearBtn, #allClearBtn {
+#clearBtn,
+#allClearBtn {
     width: 48.7%;
     font-weight: bold;
     height: 4em;
@@ -61,4 +64,3 @@ input {
     font-size: 2em;
     background-color: darkseagreen;
 }
-
