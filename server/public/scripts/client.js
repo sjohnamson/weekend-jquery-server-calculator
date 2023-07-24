@@ -10,55 +10,21 @@ function onReady() {
     $('#submitBtn').on('click', handleSubmit);
     $('#clearBtn').on('click', handleClear);
     $('#allClearBtn').on('click', handleAllClear);
-    $('#solutionList').on('click', 'li', handleRedo);
+    // $('#solutionList').on('click', '.calcItem', handleRedo);
 
 
 }
-
-const handleRedo = (event) => {
-    console.log('index: ', solutions[$('event.target').data('index')]);
-    console.log('index of this:', solutions.indexOf($(event.target)));
-
-    // $.ajax({
-    //     method: 'POST',
-    //     url: '/redo',
-    //     data: {
-    //         redoCalc: 
-    //     }
-    // }).then((response) => {
-    //     console.log("SUCCESS!!!");
-    //     // refresh solution
-    //     getSolution();
-    //     // render();
-    // }).catch(function (response) {
-    //     // notify the user
-    //     alert('request failed');
-    // });
-
-    // ${solution.number1} ${solution.operator} ${solution.number2}
-}
-
-// $.ajax({
-//     method: 'GET',
-//     url: '/redo'
-// }).then((response) => {
-//     console.log('in redo solution: ', response)
-//     // solutions = response;
-//     // console.log('solutions: ', solutions)
-// })
 
 const handleAllClear = () => {
     $('#inputField').children().empty();
-
+// POSTs to delete the calculations stored on the server
     $.ajax({
         method: 'DELETE',
         url: '/deletecalculations',
         data: 'calcHistory'
     }).then((response) => {
-        console.log("SUCCESS!!!");
-        // refresh solution
+        // refresh solution after deletion
         getSolution();
-        // render();
     }).catch(function (response) {
         // notify the user
         alert('request failed');
@@ -68,12 +34,10 @@ const handleAllClear = () => {
 }
 
 const handleNumber = (event) => {
-
-    console.log(event.target.id)
-
+// create variable with the button clicked
     let newNum = event.target.id;
-    console.log('newNum is:', newNum)
 
+// place button clicked data in correct span based on whether its being entered before or after an operator
     if ($('#operator').text() == '') {
         $('#num1').text($('#num1').text() + newNum);
     } else {
@@ -84,81 +48,85 @@ const handleNumber = (event) => {
 
 
 const handleOperator = (event) => {
-    event.preventDefault();
-
-    console.log(event.target.id)
-
+// declare a variable using the id of the button clicked
     let newOper = event.target.id;
-    console.log('newOper is:', newOper)
 
+// add operator to operator span if it is empty
     if ($('#operator').text() == '') {
         $('#operator').text($('#operator').text() + newOper);
     }
 }
 
-const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('in submit');
-
+const handleSubmit = () => {
+// create variable of entered calculation
     let operationInputs = {
         number1: $('#num1').text(),
         number2: $('#num2').text(),
         operator: $('#operator').text()
     }
-    console.log(operationInputs.number1)
 
+    // check to see if complete operation has been entered
     if (operationInputs.number1 && operationInputs.number2 && operationInputs.operator) {
-        console.log('in client post')
+        
+    //   POST the input object to the server
         $.ajax({
             method: 'POST',
             url: '/input',
             data: operationInputs
         }).then((response) => {
-            console.log("SUCCESS!!!");
             // refresh solution
             getSolution();
-            // render();
         }).catch(function (response) {
             // notify the user
             alert('request failed');
         });
     }
+    // clear input field
     $('#inputField').children().empty();
 }
 
-const handleClear = (event) => {
-    event.preventDefault();
+const handleClear = () => {
+// clear input field when clear is clicked
     $('#inputField').children().empty();
 }
 
 const getSolution = () => {
+    // GET solution array from the server
     $.ajax({
         method: 'GET',
         url: '/solution'
     }).then((response) => {
-        console.log('in get solution: ', response)
-        solutions = response;
-        console.log('solutions: ', solutions)
 
+        solutions = response;
+
+// render the solution to the DOM
         render()
     })
 }
 
 const render = () => {
-    console.log('in render');
+    // empty the soution list and solution field
     $('#solutionList').empty();
     $('#solution').text('');
 
+    // loop over the solution array, entering the first solution to the solution field and appending the other calculations to the solutions list
     for (let solution of solutions) {
         if (solution == solutions[0]) {
              $('#solution').text(solutions[0].solution);
-            console.log('this problem solution: ', solutions[0].solution)
         }
+        // solution.id = solutions.indexOf(solution);
         $('#solutionList').append(`
             <li class="calcItem">${solution.number1} ${solution.operator} ${solution.number2} = ${solution.solution}
             `)
-        solution.index = solutions.indexOf(solution);
-        console.log('solution with index: ', solution)
+     
     }
 
 }
+// beginning attempt to add on click to calculation rows to rerun calculation
+// const handleRedo = (event) => {
+//     let solutionID = $(this).children().attr('id')
+//     console.log('index: ', solutionID);
+//     console.log('index of this:', solutions.indexOf($(event.target)));
+
+  
+// }
