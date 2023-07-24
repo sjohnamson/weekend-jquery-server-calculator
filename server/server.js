@@ -51,10 +51,11 @@ app.get('/solution', (req, res) => {
     res.send(calcHistory);
 })
 
+// app.get('/redo', (req, res) => {
+//     console.log('in solution get');
 
-
-
-
+//     res.send(calcHistory);
+// })
 
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)

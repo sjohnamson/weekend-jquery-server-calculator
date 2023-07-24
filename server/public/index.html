@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,36 +10,61 @@
     <link rel="stylesheet" href="styles/styles.css">
 
 </head>
+
 <body>
-    <header>Finally, a Calculator!</header>
+    <header>
+        <h1>A Calculator!</h1>
+    </header>
     <main>
+        <div id="calculator">
             <div id="inputField">
                 <span id="num1"></span>
                 <span id="operator"></span>
                 <span id="num2"></span>
             </div>
-            <button class="numBtn" id="1">1</button>
-            <button class="numBtn" id="2">2</button>
-            <button class="numBtn" id="3">3</button>
-            <button class="numBtn" id="4">4</button>
-            <button class="numBtn" id="5">5</button>
-            <button class="numBtn" id="6">6</button>
-            <button class="numBtn" id="7">7</button>
-            <button class="numBtn" id="8">8</button>
-            <button class="numBtn" id="9">9</button>
-            <button class="numBtn" id=".">.</button>
-            <button id="submitBtn">=</button>
-            <button id="clearBtn">C</button>
-            <button id="allClearBtn">AC</button>
-            <button class="operBtn" id="+">+</button>
-            <button class="operBtn" id="-">-</button>
-            <button class="operBtn" id="*">*</button>
-            <button class="operBtn" id="/">/</button>
-        <div id="solution"></div>
+            <div id="buttons">
+
+                <div><button id="clearBtn">C</button>
+                    <button id="allClearBtn">AC</button>
+                </div>
+
+
+                <div><button class="numBtn" id="7">7</button>
+                    <button class="numBtn" id="8">8</button>
+                    <button class="numBtn" id="9">9</button>
+                    <button class="operBtn" id="+">+</button>
+                </div>
+
+
+                <div><button class="numBtn" id="4">4</button>
+                    <button class="numBtn" id="5">5</button>
+                    <button class="numBtn" id="6">6</button>
+                    <button class="operBtn" id="-">-</button>
+                </div>
+
+
+                <div><button class="numBtn" id="1">1</button>
+                    <button class="numBtn" id="2">2</button>
+                    <button class="numBtn" id="3">3</button>
+                    <button class="operBtn" id="*">*</button>
+                </div>
+
+
+                <div><button class="numBtn" id="0">0</button>
+                    <button class="numBtn" id=".">.</button>
+                    <button id="submitBtn">=</button>
+                    <button class="operBtn" id="/">/</button>
+                </div>
+            </div>
+            <div id="solution">
+                <!-- This is where the solutions will show up -->
+            </div>
+        </div>
         <ul id="solutionList">
             <!-- This is where the calculations will go -->
         </ul>
     </main>
-    
+
 </body>
+
 </html>

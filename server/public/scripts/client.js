@@ -9,13 +9,45 @@ function onReady() {
     $('.operBtn').on('click', handleOperator);
     $('#submitBtn').on('click', handleSubmit);
     $('#clearBtn').on('click', handleClear);
-    $('#allClearBtn').on('click', handleAllClear)
+    $('#allClearBtn').on('click', handleAllClear);
+    $('#solutionList').on('click', 'li', handleRedo);
 
 
 }
 
-const handleAllClear = (event) => {
-    event.preventDefault();
+const handleRedo = (event) => {
+    console.log('index: ', solutions[$('event.target').data('index')]);
+    console.log('index of this:', solutions.indexOf($(event.target)));
+
+    // $.ajax({
+    //     method: 'POST',
+    //     url: '/redo',
+    //     data: {
+    //         redoCalc: 
+    //     }
+    // }).then((response) => {
+    //     console.log("SUCCESS!!!");
+    //     // refresh solution
+    //     getSolution();
+    //     // render();
+    // }).catch(function (response) {
+    //     // notify the user
+    //     alert('request failed');
+    // });
+
+    // ${solution.number1} ${solution.operator} ${solution.number2}
+}
+
+// $.ajax({
+//     method: 'GET',
+//     url: '/redo'
+// }).then((response) => {
+//     console.log('in redo solution: ', response)
+//     // solutions = response;
+//     // console.log('solutions: ', solutions)
+// })
+
+const handleAllClear = () => {
     $('#inputField').children().empty();
 
     $.ajax({
@@ -36,7 +68,6 @@ const handleAllClear = (event) => {
 }
 
 const handleNumber = (event) => {
-    event.preventDefault();
 
     console.log(event.target.id)
 
@@ -139,8 +170,10 @@ const render = () => {
             console.log('this problem solution: ', solutions[0].solution)
         }
         $('#solutionList').append(`
-            <li>${solution.number1} ${solution.operator} ${solution.number2} = ${solution.solution}
+            <li class="calcItem">${solution.number1} ${solution.operator} ${solution.number2} = ${solution.solution}
             `)
+        solution.index = solutions.indexOf(solution);
+        console.log('solution with index: ', solution)
     }
 
 }

@@ -1,10 +1,64 @@
+body {
+    background-color: rgb(138, 138, 171);
+}
+
+header {
+    text-align: center;
+}
+
+main {
+    max-width: 500px;
+    margin: auto;
+}
+
+#calculator {
+    max-width: 350px;
+    margin: auto;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+    
 #inputField {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: white;
+    padding: .75em .25em .25em .25em;
     border: 1px solid black;
-    height: 1.5em;
+    width: 96%;
+    font-weight: bold;
+    height: 2em;
+    font-size: larger;
 }
 
 input {
     border: none;
     min-width: 0px; 
+}
+
+.numBtn, .operBtn, #submitBtn {
+    width: 23.8%;
+    font-weight: bold;
+    height: 4em;
+    font-size: larger;
+}
+
+#clearBtn, #allClearBtn {
+    width: 48.7%;
+    font-weight: bold;
+    height: 4em;
+    font-size: larger;
+}
+
+#solution {
+    text-align: center;
+    margin: 10px;
+    font-weight: bolder;
+    font-size: 2em;
+    background-color: darkseagreen;
 }
 
