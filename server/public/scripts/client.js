@@ -1,9 +1,10 @@
 $(document).ready(onReady);
 
 let solutions;
-let displayedNum;
 
 function onReady() {
+
+    getSolution();
 
     $('.numBtn').on('click', handleNumber);
     $('.operBtn').on('click', handleOperator);
@@ -29,7 +30,6 @@ const handleAllClear = () => {
         // notify the user
         alert('request failed');
     });
-
 
 }
 
